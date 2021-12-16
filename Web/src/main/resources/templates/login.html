@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>学生信息管理系统登录</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/login.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+<form id="adminlogin" method="post" name="adminlogin" action="doLogin">
+    <table style="margin: auto; width: 100%; height: 100%" border=0
+           cellspacing=0 cellpadding=0>
+        <tbody>
+        <tr>
+            <td height=150>&nbsp;</td>
+        </tr>
+        <tr style="height: 254px">
+            <td>
+                <div style="margin: 0 auto; width: 936px">
+                    <img style="display: block" src="img/body_03.jpg"></div>
+                <div style="background-color: #278296">
+                    <div style="margin: 0 auto; width: 936px">
+                        <div style="/*noinspection CssUnknownTarget,CssUnknownTarget*/
+                        background: url('img/body_05.jpg') no-repeat; height: 155px">
+                            <div style="text-align: left; width: 265px; float: right; height: 125px; _height: 95px">
+                                <table border=0 cellspacing=0 cellpadding=0 width="100%">
+                                    <tbody>
+                                    <tr>
+                                        <td style="height: 45px">
+                                            <input type="text" class=input name="uName" id="uName" required >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="password" class=input value=""
+                                                   name="uPwd" id="password" required />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 50px">
+                                            <input class="yzm" size="8"
+                                                   type="text" value="" name="uCaptcha"
+                                                   id="imagecode" required maxlength="4"/>
+
+                                            <img name="randimage"
+                                                id="randImage" src="/getCPT" width="90" height="32" border="1"
+                                                align="absmiddle" alt="验证码">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="width: 380px; float: right; clear: both">
+                                <table border=0 cellspacing=0 cellpadding=0 width=300>
+                                    <tbody>
+                                    <tr>
+                                        <td width=100 align=right>
+                                            <input style="border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-left-width: 0"
+                                                id=btnLogin src="img/btn1.jpg" type=image name=btnlogin></td>
+                                        <td width=100 align=middle>
+                                            <input style="border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-left-width: 0"
+                                                id=btnReset src="img/btn2.jpg" type=image name=btnreset></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin: 0 auto; width: 936px">
+                    <img src="img/body_06.jpg">
+                </div>
+            </td>
+        </tr>
+        <tr style="height: 30%">
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="captErr">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">验证码错误</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>验证码错误，请重新登录！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="logErr">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">登录信息错误</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>登录信息有误，请重新登录！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script th:if="${captErr}">
+    $('#captErr').modal("show")
+</script>
+
+<script th:if="${logErr}">
+    $('#logErr').modal("show")
+</script>
+
+</html>

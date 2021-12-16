@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.study.stuinfo.dao.StudentDao">
+    <resultMap id="studentMap" type="com.study.stuinfo.entity.Student">
+        <id property="NO" column="NO"/>
+        <result property="Name" column="Name"/>
+        <result property="Sex" column="Sex"/>
+        <result property="Birthday" column="Birthday"/>
+        <result property="Admission_Time" column="Admission_Time"/>
+        <result property="Political_Appearance" column="Political_Appearance"/>
+        <result property="Nation" column="Nation"/>
+        <result property="Desc" column="Desc"/>
+        <result property="Pic" column="Pic"/>
+        <association property="classInf" javaType="com.study.stuinfo.entity.Class">
+            <id property="ClassID" column="ClassID"/>
+        </association>
+        <association property="gradeInf" javaType="com.study.stuinfo.entity.Grade">
+            <id property="GradeID" column="GradeID"/>
+        </association>
+    </resultMap>
+
+    <insert id="addStudent">
+        insert into student (NO, Name, Sex,
+                             Birthday, Admission_Time, Political_Appearance,
+                             Nation, ClassID, `Desc`,
+                             Pic)
+        values ( #{NO}, #{Name}, #{Sex}
+               , #{Birthday}, #{Admission_Time}, #{Political_Appearance}
+               , #{Nation}, #{classInf.ClassID}, #{Desc}
+               , #{Pic});
+    </insert>
+
+    <update id="updStudent">
+        update student
+        <set>
+            <if test="Name != null">
+                Name = #{Name},
+            </if>
+            <if test="Sex != null">
+                Sex = #{Sex},
+            </if>
+            <if test="Birthday != null">
+                Birthday = #{Birthday},
+            </if>
+            <if test="Admission_Time != null">
+                Admission_Time = #{Admission_Time},
+            </if>
+            <if test="Political_Appearance != null">
+                Political_Appearance = #{Political_Appearance},
+            </if>
+            <if test="Nation != null">
+                Nation = #{Nation},
+            </if>
+            <if test="Desc != null">
+                `Desc` = #{Desc},
+            </if>
+            <if test="Pic != null">
+                Pic = #{Pic},
+            </if>
+            <if test="classInf != null">
+                <if test="classInf.ClassID != null">
+                    ClassID = #{classInf.ClassID}
+                </if>
+            </if>
+        </set>
+        where No = #{NO}
+    </update>
+
+    <delete id="delStudent">
+        delete from student
+        where NO = #{NO}
+    </delete>
+
+    <select id="getAllStu" resultMap="studentMap">
+        select *
+        from Student
+        <if test="stu != null">
+            <where>
+                <if test="stu.gradeInf != null">
+                    <if test="stu.gradeInf.GradeID != null">
+                        ClassID in (
+                        select ClassID from Class
+                        where GradeID = #{stu.gradeInf.GradeID}
+                        )
+                    </if>
+                </if>
+                <if test="stu.NO != null">
+                    No like concat('%',#{stu.NO},'%')
+                </if>
+                <if test="stu.Name != null">
+                    Name like concat('%',#{stu.Name},'%')
+                </if>
+                <if test="stu.Sex != null">
+                    Sex = #{stu.Sex}
+                </if>
+                <if test="stu.Birthday_Begin != null and stu.Birthday_Over != null">
+                    Birthday >= #{stu.Birthday_Begin} and
+                    Birthday &lt;= #{stu.Birthday_Over}
+                </if>
+                <if test="stu.Admission_Time_Begin != null and stu.Admission_Time_Over != null">
+                    Admission_Time >= #{stu.Admission_Time_Begin} and
+                    Admission_Time &lt;= #{stu.Admission_Time_Over}
+                </if>
+                <if test="stu.Political_Appearance != null">
+                    Political_Appearance = #{stu.Political_Appearance}
+                </if>
+                <if test="stu.Nation != null">
+                    Nation = #{stu.Nation}
+                </if>
+                <if test="stu.classInf != null">
+                    <if test="stu.classInf.ClassID != null">
+                        ClassID = #{stu.classInf.ClassID}
+                    </if>
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <select id="getStudent" resultMap="studentMap">
+        select *
+        from student
+        where NO = #{StuNo}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,66 @@
+<script th:if="!${session?.userInfo}">
+    location.href = "login";
+</script>
+
+<script type="text/javascript">
+    function setDateTime() {
+        var date = new Date();
+        var day = date.getDay();
+        var week;
+        switch (day) {
+            case 0:
+                week = "星期日";
+                break;
+            case 1:
+                week = "星期一";
+                break;
+            case 2:
+                week = "星期二";
+                break;
+            case 3:
+                week = "星期三";
+                break;
+            case 4:
+                week = "星期四";
+                break;
+            case 5:
+                week = "星期五";
+                break;
+            case 6:
+                week = "星期六";
+                break;
+        }
+        var hour = 0;
+        var minute = 0;
+        var second = 0;
+        if (date.getHours() < 10) {
+            hour = "0" + date.getHours();
+        } else {
+            hour = date.getHours();
+        }
+        if (date.getMinutes() < 10) {
+            minute = "0" + date.getMinutes();
+        } else {
+            minute = date.getMinutes();
+        }
+        if (date.getSeconds() < 10) {
+            second = "0" + date.getSeconds();
+        } else {
+            second = date.getSeconds();
+        }
+        var today = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日  " + week + " " + hour + ":" + minute + ":" + second;
+        document.getElementById("today").innerHTML = today;
+    }
+    window.setInterval("setDateTime()", 1000);
+</script>
+
+<div class="row-fluid" style="margin:10px 0">
+    <div class="span12">
+        <div class="head d-flex flex-row justify-content-between">
+            <div class="headRight">
+                欢迎管理员：<span style="color: red" th:utext="${session?.userInfo?.Name}"></span>&nbsp;&nbsp;&nbsp;
+            </div>
+            <span id="today" class="currentDateTime"></span>
+        </div>
+    </div>
+</div>

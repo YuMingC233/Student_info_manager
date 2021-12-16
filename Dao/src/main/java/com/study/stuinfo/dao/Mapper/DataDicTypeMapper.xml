@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.study.stuinfo.dao.DataDicTypeDao">
+
+    <insert id="addDataDicType">
+        insert into data_dictionary_type (TypeName, TypeDesc)
+        values (#{TypeName},
+                #{TypeDesc});
+    </insert>
+
+    <update id="updDataDicType">
+        update data_dictionary_type
+        <set>
+            <if test="TypeName != null">
+                TypeName = #{TypeName},
+            </if>
+
+            <if test="TypeDesc != null">
+                TypeDesc = #{TypeDesc}
+            </if>
+        </set>
+        where TypeID = #{TypeID}
+    </update>
+
+    <delete id="delDataDicType">
+        delete from data_dictionary_type
+        where TypeID = #{TypeID}
+    </delete>
+
+    <select id="getAllDataDicType" resultType="Data_Dictionary_Type">
+        select *
+        from data_dictionary_type
+    </select>
+
+    <select id="getDataDicType" resultType="Data_Dictionary_Type">
+        select *
+        from data_dictionary_type
+        <where>
+            <if test="TypeID != null">
+                TypeID = #{TypeID}
+            </if>
+        </where>
+    </select>
+</mapper>

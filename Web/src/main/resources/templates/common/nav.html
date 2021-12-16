@@ -1,0 +1,12 @@
+<div class="row-fluid" style="margin-top: 20px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            当前位置：
+            <li class="breadcrumb-item active" aria-current="page"><a href="index">主页</a></li>
+            <li class="breadcrumb-item" aria-current="page" th:if="${session.firNav != null}"
+                th:utext="${session.firNav}"></li>
+            <li class="breadcrumb-item" aria-current="page" th:if="${session.SecNav != null}"
+                th:utext="${session.SecNav}"></li>
+        </ol>
+    </nav>
+</div>

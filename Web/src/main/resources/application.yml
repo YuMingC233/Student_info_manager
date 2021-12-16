@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/StudentInfo_db?useSSL=false&useUnicode=true&serverTimezone=GMT
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template: true
+    encoding: UTF-8
+    cache: false
+    mode: HTML
+    servlet:
+      content-type: text/html
+    check-template-location: true
+
+  mvc:
+    static-path-pattern: /**
+
+  redis:
+    connect-timeout: 3000
+
+mybatis:
+  mapper-locations: classpath:com/study/stuinfo/dao/Mapper/*.xml
+  type-aliases-package: com.study.stuinfo.entity
+
+pagehelper:
+  auto-dialect: true
+  page-size-zero: false
+  reasonable: true
+  offset-as-page-num: false
+  row-bounds-with-count: false
+  auto-runtime-dialect: false
+  close-conn: true
+  default-count: false
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.study.stuinfo.dao.UserDao">
+    <update id="updPassWord">
+        update user
+        <set>
+            <if test="Password != null">
+                Password = #{Password}
+            </if>
+        </set>
+        where ID = #{ID}
+    </update>
+
+    <select id="Login" resultType="Integer" parameterType="User">
+        select count(*)
+        from user
+        where Name = #{Name} and Password = #{Password};
+    </select>
+
+    <select id="getUserInfByName" resultType="User">
+        select *
+        from user
+        where Name = #{Name}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.study.stuinfo.dao.ClassDao">
+    <resultMap id="ClassMap" type="com.study.stuinfo.entity.Class">
+        <id property="ClassID" column="ClassID"/>
+        <result property="Name" column="Name"/>
+        <result property="ClassDesc" column="ClassDesc"/>
+        <association property="gradeInf" javaType="com.study.stuinfo.entity.Grade">
+            <id property="GradeID" column="GradeID"/>
+        </association>
+    </resultMap>
+
+    <insert id="addClass">
+        insert into class (Name, GradeID, ClassDesc)
+        values (#{Name},
+                #{gradeInf.GradeID},
+                #{ClassDesc});
+    </insert>
+
+    <update id="updClass">
+        update class
+        <set>
+            <if test="Name != null">
+                Name = #{Name},
+            </if>
+            <if test="gradeInf.GradeID != null">
+                GradeID = #{gradeInf.GradeID},
+            </if>
+            <if test="ClassDesc != null">
+                ClassDesc = #{ClassDesc}
+            </if>
+        </set>
+        where ClassID = #{ClassID}
+    </update>
+
+    <delete id="delClass">
+        delete from class
+        where ClassID = #{ClassID}
+    </delete>
+
+    <select id="getAllClass" resultMap="ClassMap">
+        select *
+        from class
+    </select>
+
+    <select id="getClass" resultMap="ClassMap">
+        select *
+        from class
+        <where>
+            <if test="ClassID != null">
+                ClassID = #{ClassID}
+            </if>
+        </where>
+    </select>
+</mapper>

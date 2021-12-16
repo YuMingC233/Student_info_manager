@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.study.stuinfo.dao.GradeDao">
+
+    <insert id="addGrade">
+        insert into grade (Name, `Desc`)
+        values (#{Name},#{Desc});
+    </insert>
+
+    <update id="updGrade">
+        update grade
+        <set>
+            <if test="Name != null">
+                Name = #{Name},
+            </if>
+            <if test="Desc != null">
+                `Desc` = #{Desc}
+            </if>
+        </set>
+        where GradeID = #{GradeID}
+    </update>
+
+    <delete id="delGrade">
+        delete from grade where GradeID = #{GradeID}
+    </delete>
+
+    <select id="getAllGrade" resultType="Grade">
+        select *
+        from grade
+    </select>
+
+    <select id="getGrade" resultType="Grade">
+        select *
+        from grade
+        <where>
+            <if test="ID != null">
+                GradeID = #{ID}
+            </if>
+        </where>
+    </select>
+</mapper>

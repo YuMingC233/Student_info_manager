@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.study.stuinfo.dao.DataDicDao">
+    <resultMap id="DataDicMap" type="com.study.stuinfo.entity.Data_Dictionary">
+        <id property="ID" column="ID"/>
+        <result property="Value" column="Value"/>
+        <result property="Desc" column="Desc"/>
+        <association property="typeInf" javaType="com.study.stuinfo.entity.Data_Dictionary_Type">
+            <id property="TypeID" column="TypeID"/>
+        </association>
+    </resultMap>
+
+    <insert id="addData_Dictionary">
+        insert into data_dictionary (TypeID, Value, `Desc`)
+        values (#{typeInf.TypeID},#{Value},#{Desc});
+    </insert>
+
+    <update id="updData_Dictionary">
+        update data_dictionary
+        <set>
+            <if test="Value != null">
+                Value = #{Value},
+            </if>
+            <if test="Desc != null">
+                `Desc` = #{Desc},
+            </if>
+            <if test="typeInf != null">
+                <if test="typeInf.TypeID != null">
+                    TypeID = #{typeInf.TypeID}
+                </if>
+            </if>
+        </set>
+        where ID = #{ID}
+    </update>
+
+    <delete id="delData_Dictionary">
+        delete from data_dictionary where ID = #{ID}
+    </delete>
+
+    <select id="getAllDataDic" resultMap="DataDicMap">
+        select *
+        from data_dictionary
+
+    </select>
+
+    <select id="getByTypeID" resultMap="DataDicMap">
+        select *
+        from data_dictionary
+        <where>
+            <if test="ID != null">
+                TypeID = #{TypeID}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDataDicList" resultMap="DataDicMap">
+        select *
+        from data_dictionary
+        <if test="dd != null">
+            <where>
+            <if test="dd.ID != null">
+                ID = #{dd.ID}
+            </if>
+            <if test="dd.Value != null">
+                `Value` = #{dd.Value}
+            </if>
+            <if test="dd.Desc != null">
+                `Desc` = #{dd.Desc}
+            </if>
+            <if test="dd.typeInf != null">
+                <if test="dd.typeInf.TypeName != null">
+                    TypeID in (
+                        select TypeID
+                        from data_dictionary_type
+                        where TypeName like concat('%',#{dd.typeInf.TypeName},'%')
+                    )
+                </if>
+            </if>
+        </where></if>
+    </select>
+
+    <select id="getByID" resultMap="DataDicMap">
+        select *
+        from data_dictionary
+        where ID = #{ID}
+    </select>
+</mapper>

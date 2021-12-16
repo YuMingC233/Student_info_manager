@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.Study</groupId>
+        <artifactId>stuinfo</artifactId>
+        <version>1.0.0-ALPHA</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <groupId>com.Study.stuinfo</groupId>
+    <artifactId>web</artifactId>
+    <version>1.0.0-ALPHA</version>
+    <name>Web</name>
+    <description>Demo module for Student Info</description>
+
+    <properties>
+        <java.version>15</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.Study</groupId>
+            <artifactId>Dao</artifactId>
+            <version>1.0.0-ALPHA</version>
+        </dependency>
+        <dependency>
+            <groupId>com.Study</groupId>
+            <artifactId>Service</artifactId>
+            <version>1.0.0-ALPHA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version>
+        </dependency>
+
+        <!-- 验证码接口 -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
