@@ -26,6 +26,7 @@ public class dataDicController {
 								HttpServletRequest req,
 								@RequestParam(required = false) Integer offset) {
 		session.setAttribute("firNav", "数据字典信息管理");
+		session.setAttribute("SecNav", "数据字典维护");
 		List<Data_Dictionary> ddList = dataDicS.getDataDicList(new Data_Dictionary(), ObjectUtils.isEmpty(offset) ? 1 : offset);
 		PageInfo info = new PageInfo(ddList);
 		for (Data_Dictionary ddItem:

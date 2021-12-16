@@ -61,7 +61,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/modifyPwd")
-	public String toModifyPwd(){
+	public String toModifyPwd(HttpSession session,
+							  HttpServletRequest req,
+							  @RequestParam(required = false) Integer offset){
+		session.setAttribute("firNav", "修改密码");
+		session.setAttribute("SecNav", null);
 		return "modifyPassword";
 	}
 

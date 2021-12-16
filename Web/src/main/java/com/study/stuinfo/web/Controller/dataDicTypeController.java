@@ -27,6 +27,7 @@ public class dataDicTypeController {
 								  HttpServletRequest req,
 								  @RequestParam(required = false) Integer offset){
 		session.setAttribute("firNav", "字典类别信息管理");
+		session.setAttribute("SecNav", "数据字典类别维护");
 		List<Data_Dictionary_Type> ddtList = ddtS.getDataDicTypeList((ObjectUtils.isEmpty(offset) ? 1 : offset));
 		PageInfo pageInfo = new PageInfo(ddtList);
 
