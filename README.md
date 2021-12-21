@@ -1,8 +1,8 @@
 # 学生信息管理系统
-## 该项目的主要构成：
+### 该项目的主要构成：
 该项目由java的Spring，Spring Boot框架构建，由maven管理依赖项，前端则大部分为bootstrap构建，数据管理则使用MySql。
 
-## 该应用的功能：
+### 该应用的功能：
 1. 基础的登录系统
 ![image](https://user-images.githubusercontent.com/48896152/146347337-e0f4ac91-ee38-49d4-9b93-6a06f6f54ed5.png)
 
